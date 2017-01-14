@@ -1,3 +1,15 @@
 <h1>Home</h1>
 <h2>Hello {{ name }}</h2><br/>
 <a href="#/watch">Watch page</a>
+<button onclick="get()">GET</button>
+<script>
+    function get() {
+        $.ajax({
+            url : '/videos',
+            method: "GET",
+            dataType: "json"
+        }).done(function (data) {
+           $("body").append('<iframe width="560" height="315" src="https://www.youtube.com/embed/'+ data[0].idv +'" frameborder="0" allowfullscreen></iframe>')
+        })
+    }
+</script>
