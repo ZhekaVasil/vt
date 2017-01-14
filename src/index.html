@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--<base href="/vt/src/">-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Video Translate</title>
+
+    <link href="assets/css/app.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="vendor/html5shiv.min.js"></script>
+    <![endif]-->
+
+
+</head>
+    <body>
+
+        <ng-view autoscroll="true"></ng-view>
+
+        <script src="vendor/jquery-3.1.1.min.js"></script>
+        <script src="vendor/angular.min.js"></script>
+        <script src="vendor/angular-route.min.js"></script>
+
+        <script src="app/module.js"></script>
+        <script src="app/config.js"></script>
+
+        <script src="app/common/module.js"></script>
+        <script src="app/home/module.js"></script>
+        <script src="app/watch/module.js"></script>
+
+    </body>
+</html>
