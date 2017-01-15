@@ -1,4 +1,6 @@
 var express = require('express'); //express
+var mongoose = require('mongoose');
+
 
 // импортируем маршрутизаторы
 var router = require('./routes/router');
