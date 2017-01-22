@@ -39,25 +39,27 @@ db.on('disconnected', function () {
     });
 });
 
-mongoose.connect(dbURI, {server:{auto_reconnect:true}});
+mongoose.connect(dbURI, {server: {auto_reconnect: true}});
 
 var Video = mongoose.Schema({
     idv: String,
-    thumbnail: Number,
-    aud : String,
+    thumbn: String,
+    aud : Boolean,
     title : String,
-    description : String
+    desc : String
 });
-var video = mongoose.model('video',Video);
+var videos = mongoose.model('Video',Video);
 
 
 router.get('/',function(req,res){
     res.render('Starter');
 });
 
-// API
+/**
+ *    API
+ */
 router.get('/api/videos', function (req, res) {
-    video.find({}, function (err, data) {
+    videos.find({}, function (err, data) {
         if (err || !data) {
             res.status(500).send({"error" : err});
         } else {
@@ -67,7 +69,7 @@ router.get('/api/videos', function (req, res) {
 });
 
 router.get('/api/video/:unid', function (req, res) {
-    video.findOne({'_id': req.params.unid}, function (err, data) {
+    videos.findOne({'_id': req.params.unid}, function (err, data) {
         if (err || !data) {
             res.status(500).send({"error" : err});
         } else {

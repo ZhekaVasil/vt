@@ -22,7 +22,7 @@
         Videos.getVideos().then(
             function (response) {
                 if (response.status == 200) {
-                    $scope.videos =  response.data.videos;
+                    $scope.videos =  response.data.videos.reverse();
                 } else {
                     $log.log(response.status);
                 }

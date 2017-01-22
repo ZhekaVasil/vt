@@ -7,9 +7,9 @@
         .module('vt.services')
         .factory('vtVideos', Videos);
 
-    Videos.$inject = ['$http', '$q'];
+    Videos.$inject = ['$http'];
 
-    function Videos($http, $q) {
+    function Videos($http) {
 
         var factory = {
             getVideos: getVideos,
