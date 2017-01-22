@@ -4,6 +4,7 @@
   "description": "Video Translate",
   "main": "index.js",
   "dependencies": {
+    "angular-cookies": "^1.6.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
