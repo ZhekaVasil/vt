@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<ng-view autoscroll="true"></ng-view>
+<div data-ng-view data-autoscroll="true"></div>
 
 <script src="vendor/jquery-3.1.1.min.js"></script>
 <script src="vendor/angular.min.js"></script>
@@ -26,8 +26,16 @@
 <script src="app/config.js"></script>
 
 <script src="app/common/module.js"></script>
+
+
 <script src="app/home/module.js"></script>
 <script src="app/watch/module.js"></script>
+<script src="app/services/module.js"></script>
+<script src="app/filters/module.js"></script>
+
+<script src="app/services/videos.js"></script>
+
+<script src="app/filters/trust-url.js"></script>
 
 </body>
 </html>

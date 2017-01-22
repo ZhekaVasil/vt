@@ -9,25 +9,34 @@ var db = mongoose.connection;
 
 
 db.on('error', function(error) {
-    console.error('Error in MongoDb connection: ' + error);
+    console.error('Error in MongoDb connection: ' + error +' '+ new Date().toLocaleTimeString());
     mongoose.disconnect();
 });
 db.on('connected', function() {
-    console.log('connected!');
+    console.log('connected! ' + new Date().toLocaleTimeString());
 });
 db.once('open', function() {
-    console.log('connection open');
+    console.log('connection open ' + new Date().toLocaleTimeString());
 });
 db.on('reconnected', function () {
-    console.log('reconnected');
+    console.log('reconnected ' + new Date().toLocaleTimeString());
 });
-db.on('disconnected', function() {
-    console.log('disconnected');
-    console.log('dbURI is: '+dbURI);
-    mongoose.connect(dbURI,
-        {server: {auto_reconnect:true,
-            socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 }},
-            replset: { socketOptions: { keepAlive: 1, connectTimeoutMS : 30000 } }});
+db.on('disconnected', function () {
+    console.log('disconnected ' + new Date().toLocaleTimeString());
+    console.log('dbURI is: ' + dbURI);
+    mongoose.connect(dbURI, {
+        server: {
+            auto_reconnect: true,
+            socketOptions: {
+                keepAlive: 1, connectTimeoutMS: 30000
+            }
+        },
+        replset: {
+            socketOptions: {
+                keepAlive: 1, connectTimeoutMS: 30000
+            }
+        }
+    });
 });
 
 mongoose.connect(dbURI, {server:{auto_reconnect:true}});
@@ -46,12 +55,24 @@ router.get('/',function(req,res){
     res.render('Starter');
 });
 
+// API
 router.get('/api/videos', function (req, res) {
     video.find({}, function (err, data) {
         if (err || !data) {
-            res.status(500).send();
+            res.status(500).send({"error" : err});
+        } else {
+            res.status(200).send({"videos" : data, "count": data.length});
         }
-        res.status(200).send(data);
+    });
+});
+
+router.get('/api/video/:unid', function (req, res) {
+    video.findOne({'_id': req.params.unid}, function (err, data) {
+        if (err || !data) {
+            res.status(500).send({"error" : err});
+        } else {
+            res.status(200).send({"video" : data});
+        }
     });
 });
 

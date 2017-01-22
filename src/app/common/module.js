@@ -1,7 +1,7 @@
 /**
  * common components
  */
-(function () {
+;(function () {
     'use strict';
 
     angular.module('vt.common', []);

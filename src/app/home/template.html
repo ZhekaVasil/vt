@@ -1,15 +1,6 @@
 <h1>Home</h1>
-<h2>Hello {{ name }}</h2><br/>
+<h2>Hello <span data-ng-bind="::name"></span></h2><br/>
 <a href="#/watch">Watch page</a>
-<button onclick="get()">GET</button>
-<script>
-    function get() {
-        $.ajax({
-            url : '/api/videos',
-            method: "GET",
-            dataType: "json"
-        }).done(function (data) {
-           $("body").append('<iframe width="560" height="315" src="https://www.youtube.com/embed/'+ data[0].idv +'" frameborder="0" allowfullscreen></iframe>')
-        })
-    }
-</script>
+<div data-ng-repeat="video in videos track by $index">
+    <a data-ng-href="#/watch/{{ ::video._id }}"><img data-ng-src="{{ ::video.thumb }}"/></a>
+</div>

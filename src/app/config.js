@@ -1,4 +1,4 @@
-(function () {
+;(function () {
     'use strict';
 
     angular.module('vt').config(['$routeProvider','$locationProvider', function ($routeProvider, $locationProvider) {
@@ -10,7 +10,7 @@
                 templateUrl : 'app/home/template.html',
                 controller: 'vtHomeController'
             })
-            .when('/watch', {
+            .when('/watch/:unid', {
                 templateUrl : 'app/watch/template.html',
                 controller: 'vtWatchController'
             })
