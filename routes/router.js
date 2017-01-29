@@ -7,39 +7,42 @@ var dbURI = 'mongodb://localhost/vt';
 
 var db = mongoose.connection;
 
+var options = {
+    server: {
+        auto_reconnect: true,
+        socketOptions: {
+            keepAlive: 1,
+            connectTimeoutMS: 60000
+        }
+    },
+    replset: {
+        socketOptions: {
+            keepAlive: 1,
+            connectTimeoutMS: 60000
+        }
+    }
+};
 
 db.on('error', function(error) {
     console.error('Error in MongoDb connection: ' + error +' '+ new Date().toLocaleTimeString());
     mongoose.disconnect();
 });
 db.on('connected', function() {
-    console.log('connected! ' + new Date().toLocaleTimeString());
+    console.log('Mongo connected! ' + new Date().toLocaleTimeString());
 });
 db.once('open', function() {
-    console.log('connection open ' + new Date().toLocaleTimeString());
+    console.log('Mongo connection open ' + new Date().toLocaleTimeString());
 });
 db.on('reconnected', function () {
-    console.log('reconnected ' + new Date().toLocaleTimeString());
+    console.log('Mongo reconnected ' + new Date().toLocaleTimeString());
 });
 db.on('disconnected', function () {
-    console.log('disconnected ' + new Date().toLocaleTimeString());
+    console.log('Mongo disconnected ' + new Date().toLocaleTimeString());
     console.log('dbURI is: ' + dbURI);
-    mongoose.connect(dbURI, {
-        server: {
-            auto_reconnect: true,
-            socketOptions: {
-                keepAlive: 1, connectTimeoutMS: 30000
-            }
-        },
-        replset: {
-            socketOptions: {
-                keepAlive: 1, connectTimeoutMS: 30000
-            }
-        }
-    });
+    mongoose.connect(dbURI, options);
 });
 
-mongoose.connect(dbURI, {server: {auto_reconnect: true}});
+mongoose.connect(dbURI, options);
 
 var Video = mongoose.Schema({
     idv: String,
