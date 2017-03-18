@@ -66,7 +66,7 @@ router.get('/api/videos', function (req, res) {
         if (err || !data) {
             res.status(500).send({"error" : err});
         } else {
-            res.status(200).send({"videos" : data, "count": data.length});
+            res.status(200).send({"success": true, "videos" : data, "count": data.length});
         }
     });
 });
@@ -76,7 +76,7 @@ router.get('/api/video/:unid', function (req, res) {
         if (err || !data) {
             res.status(500).send({"error" : err});
         } else {
-            res.status(200).send({"video" : data});
+            res.status(200).send({"success": true, "video" : data});
         }
     });
 });
